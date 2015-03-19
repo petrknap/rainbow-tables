@@ -1,0 +1,33 @@
+{
+    "name": "petrknap/rainbow-tables",
+    "description": "Implementation of rainbow tables",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Petr Knap",
+            "email": "dev@petrknap.cz",
+            "homepage": "http://petrknap.cz",
+            "role": "Developer"
+        }
+    ],
+    "config": {
+        "preferred-install": "dist"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "require": {
+        "php": ">=5.3",
+        "petrknap/utils": "2015.01.20"
+    },
+    "require-dev": {
+        "phpunit/phpunit": ">=4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "PetrKnap\\RainbowTables\\": "src/"
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    }
+}
