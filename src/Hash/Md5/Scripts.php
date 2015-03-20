@@ -10,7 +10,7 @@ class Scripts
     private static function getStorage() {
         $database = new Database();
         $database->Type = Database::TYPE_SQLite;
-        $database->HostOrPath = "HashMd5.sqlite";
+        $database->HostOrPath = __DIR__ . "/HashMd5.sqlite";
 
         return new HashMd5Storage($database);
     }
