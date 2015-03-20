@@ -38,7 +38,7 @@ class MainTest extends PHPUnit_Framework_TestCase
     {
         $this->testCanGenerateRainbowTable();
 
-        $block3 = $this->generator->generateRange(3);
+        $block3 = $this->generator->generateBlock(3);
 
         foreach($block3 as $record) {
             try {
@@ -49,7 +49,7 @@ class MainTest extends PHPUnit_Framework_TestCase
             }
         }
 
-        $block3 = $this->generator->generateRange(7);
+        $block3 = $this->generator->generateBlock(7);
 
         foreach($block3 as $record) {
             try {

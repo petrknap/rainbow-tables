@@ -40,7 +40,7 @@ class Main
     }
 
     public function processBlock($blockNumber) {
-        $records = $this->generator->generateRange($blockNumber);
+        $records = $this->generator->generateBlock($blockNumber);
         $exception = $this->storage->saveRecords($records);
         if(self::$VERBOSE) {
             $last = array_pop($records);

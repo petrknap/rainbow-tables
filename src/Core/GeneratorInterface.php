@@ -5,10 +5,10 @@ namespace PetrKnap\RainbowTables\Core;
 interface GeneratorInterface
 {
     /**
-     * Returns range of input data
+     * Returns block of records
      *
-     * @param int $index
+     * @param int $blockNumber
      * @return RecordInterface[]
      */
-    public function generateRange($index = -1);
+    public function generateBlock($blockNumber = -1);
 }

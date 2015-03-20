@@ -7,6 +7,8 @@ use PetrKnap\Utils\DataStorage\Database;
 
 class Scripts
 {
+    const BATCH_SIZE = 100;
+
     private static function getStorage() {
         $database = new Database();
         $database->Type = Database::TYPE_SQLite;
@@ -21,8 +23,8 @@ class Scripts
 
         $i = 0;
         while(true) {
-            Main::generateRainbowTable(self::getStorage(), new HashMd5Generator(), $i, $i + HashMd5Generator::BLOCK_SIZE);
-            $i += HashMd5Generator::BLOCK_SIZE + 1;
+            Main::generateRainbowTable(self::getStorage(), new HashMd5Generator(), $i, $i + self::BATCH_SIZE);
+            $i += self::BATCH_SIZE + 1;
         }
     }
 }

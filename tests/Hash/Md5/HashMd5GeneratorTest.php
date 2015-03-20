@@ -14,14 +14,14 @@ class HashMd5GeneratorTest extends PHPUnit_Framework_TestCase
         $this->range = new HashMd5Generator();
     }
 
-    public function testGenerateRangeWorks()
+    public function testGenerateBlockWorks()
     {
-        $singleBlock = $this->range->generateRange();
+        $singleBlock = $this->range->generateBlock();
 
         $this->assertCount(HashMd5Generator::MAX_BLOCK_SIZE, $singleBlock);
 
         for($i = 0; $i < 5; $i++) {
-            $currentBlock = $this->range->generateRange($i);
+            $currentBlock = $this->range->generateBlock($i);
             $this->assertCount(HashMd5Generator::BLOCK_SIZE, $currentBlock);
         }
     }

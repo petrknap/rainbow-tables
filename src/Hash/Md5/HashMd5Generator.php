@@ -15,21 +15,19 @@ class HashMd5Generator implements GeneratorInterface
      * @param int $blockNumber
      * @return RecordInterface[]|FindableInterface[]
      */
-    public function generateRange($blockNumber = -1)
+    public function generateBlock($blockNumber = -1)
     {
         if($blockNumber < 0) {
-            $from = 0;
-            $to = self::MAX_BLOCK_SIZE;
+            $stop = self::MAX_BLOCK_SIZE;
         }
         else {
-            $from = $blockNumber * self::BLOCK_SIZE;
-            $to = ($blockNumber + 1) * self::BLOCK_SIZE;
+            $stop = self::BLOCK_SIZE;
         }
 
         $data = array();
-        for($index = $from; $index < $to; $index++) {
+        for($index = 1; $index <= $stop; $index++) {
             $record = new HashMd5Record();
-            $record->setData(array("input" => $index));
+            $record->setData(array("input" => "{$blockNumber}:{$index}"));
             $data[] = $record;
         }
 
