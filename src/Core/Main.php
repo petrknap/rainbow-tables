@@ -41,11 +41,16 @@ class Main
 
     public function processBlock($blockNumber) {
         $records = $this->generator->generateRange($blockNumber);
-        $this->storage->saveRecords($records);
+        $exception = $this->storage->saveRecords($records);
         if(self::$VERBOSE) {
             $last = array_pop($records);
             $first = $records[0];
-            fwrite(STDOUT, "Block from {$first} to {$last} saved.\n");
+            if(!$exception) {
+                fwrite(STDOUT, "  INFO: Block from {$first} to {$last} saved.\n");
+            }
+            else {
+                fwrite(STDOUT, "  ERROR: Block from {$first} to {$last} failed.\nWARNING: {$exception->getMessage()}\n");
+            }
         }
     }
 
