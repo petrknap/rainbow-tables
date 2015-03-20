@@ -50,11 +50,18 @@ class HashMd5Storage implements StorageInterface
     }
 
     public function saveRecords(array $records) {
-        $this->database->BeginTransaction();
-        foreach($records as $record) {
-            $this->saveRecord($record);
+        try {
+            $this->database->BeginTransaction();
+            foreach ($records as $record) {
+                $this->saveRecord($record);
+            }
+            $this->database->Commit();
+            return null;
         }
-        $this->database->Commit();
+        catch(StorageException $se) {
+            $this->database->RollBack();
+            return $se;
+        }
     }
 
     public function saveRecord($record)

@@ -23,6 +23,7 @@ interface StorageInterface
      * Saves records into data storage
      *
      * @param RecordInterface[]|FindableInterface[] $records
+     * @return null|StorageException
      */
     public function saveRecords(array $records);
 
