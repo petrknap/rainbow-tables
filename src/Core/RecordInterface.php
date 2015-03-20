@@ -1,6 +1,6 @@
 <?php
 
-namespace PetrKnap\RainbowTables\Record;
+namespace PetrKnap\RainbowTables\Core;
 
 interface RecordInterface
 {
@@ -17,4 +17,11 @@ interface RecordInterface
      * @param array $data
      */
     public function setData(array $data);
+
+    /**
+     * Returns string representation of this object
+     *
+     * @return string
+     */
+    public function __toString();
 }

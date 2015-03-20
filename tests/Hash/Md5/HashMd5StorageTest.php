@@ -1,8 +1,8 @@
 <?php
 
-use PetrKnap\RainbowTables\Record\HashMd5Record;
-use PetrKnap\RainbowTables\Storage\HashMd5Storage;
-use PetrKnap\RainbowTables\Storage\StorageException;
+use PetrKnap\RainbowTables\Core\StorageException;
+use PetrKnap\RainbowTables\Hash\Md5\HashMd5Record;
+use PetrKnap\RainbowTables\Hash\Md5\HashMd5Storage;
 use PetrKnap\Utils\DataStorage\Database;
 
 class HashMd5StorageTest extends PHPUnit_Framework_TestCase

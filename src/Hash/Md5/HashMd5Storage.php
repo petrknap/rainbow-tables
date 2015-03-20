@@ -1,10 +1,11 @@
 <?php
 
-namespace PetrKnap\RainbowTables\Storage;
+namespace PetrKnap\RainbowTables\Hash\Md5;
 
-use PetrKnap\RainbowTables\Record\FindableInterface;
-use PetrKnap\RainbowTables\Record\HashMd5Record;
-use PetrKnap\RainbowTables\Record\RecordInterface;
+use PetrKnap\RainbowTables\Core\FindableInterface;
+use PetrKnap\RainbowTables\Core\RecordInterface;
+use PetrKnap\RainbowTables\Core\StorageException;
+use PetrKnap\RainbowTables\Core\StorageInterface;
 use PetrKnap\Utils\DataStorage\Database;
 use PetrKnap\Utils\Security\Hash;
 
@@ -20,10 +21,14 @@ class HashMd5Storage implements StorageInterface
      */
     private $name;
 
-    public function __construct(Database $database, $name = __CLASS__)
+    public function __construct(Database $database, $name = "rainbow_table")
     {
         $this->database = $database;
         $this->name = $name;
+
+        if(!$this->database->IsConnected) {
+            $this->database->Connect();
+        }
     }
 
     public function createStorage()
@@ -44,15 +49,39 @@ class HashMd5Storage implements StorageInterface
         );
     }
 
-    public function saveRecord(RecordInterface $record)
+    public function saveRecords(array $records) {
+        $this->database->BeginTransaction();
+        foreach($records as $record) {
+            $this->saveRecord($record);
+        }
+        $this->database->Commit();
+    }
+
+    public function saveRecord($record)
     {
         try {
+            if(!($record instanceof RecordInterface) || !($record instanceof FindableInterface)) {
+                throw new \Exception(
+                    sprintf(
+                        "The %s must implements %s and %s.",
+                        get_class($record),
+                        RecordInterface::class,
+                        FindableInterface::class
+                    )
+                );
+            }
+
             $this->database->Query(
                 sprintf(
-                    "INSERT INTO %s (id, md5_input, md5_output) VALUES (:output, :input, :output)",
+                    "INSERT INTO %s (id, md5_input, md5_output) VALUES (:id, :input, :output)",
                     $this->name
                 ),
-                $record->getData()
+                array_merge(
+                    array(
+                        "id" => $record->getKey()
+                    ),
+                    $record->getData()
+                )
             );
         }
         catch(\Exception $e) {

@@ -1,9 +1,6 @@
 <?php
 
-namespace PetrKnap\RainbowTables\Storage;
-
-use PetrKnap\RainbowTables\Record\FindableInterface;
-use PetrKnap\RainbowTables\Record\RecordInterface;
+namespace PetrKnap\RainbowTables\Core;
 
 interface StorageInterface
 {
@@ -17,10 +14,17 @@ interface StorageInterface
     /**
      * Saves record into data storage
      *
-     * @param RecordInterface $record
+     * @param RecordInterface|FindableInterface $record
      * @throws StorageException
      */
-    public function saveRecord(RecordInterface $record);
+    public function saveRecord($record);
+
+    /**
+     * Saves records into data storage
+     *
+     * @param RecordInterface[]|FindableInterface[] $records
+     */
+    public function saveRecords(array $records);
 
     /**
      * Returns record from data storage

@@ -1,6 +1,6 @@
 <?php
 
-use PetrKnap\RainbowTables\Record\HashMd5Record;
+use PetrKnap\RainbowTables\Hash\Md5\HashMd5Record;
 use PetrKnap\Utils\Security\Hash;
 
 class HashMd5RecordTest extends PHPUnit_Framework_TestCase

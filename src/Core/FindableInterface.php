@@ -1,6 +1,6 @@
 <?php
 
-namespace PetrKnap\RainbowTables\Record;
+namespace PetrKnap\RainbowTables\Core;
 
 interface FindableInterface
 {

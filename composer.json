@@ -16,7 +16,7 @@
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
-        "php": ">=5.3",
+        "php": ">=5.5",
         "petrknap/utils": "2015.01.20"
     },
     "require-dev": {
@@ -28,6 +28,7 @@
         }
     },
     "scripts": {
-        "test": "phpunit"
+        "test": "phpunit",
+        "md5-generate": "PetrKnap\\RainbowTables\\Hash\\Md5\\Scripts::generate"
     }
 }

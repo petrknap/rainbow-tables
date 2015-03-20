@@ -1,7 +1,9 @@
 <?php
 
-namespace PetrKnap\RainbowTables\Record;
+namespace PetrKnap\RainbowTables\Hash\Md5;
 
+use PetrKnap\RainbowTables\Core\FindableInterface;
+use PetrKnap\RainbowTables\Core\RecordInterface;
 use PetrKnap\Utils\Security\Hash;
 
 class HashMd5Record implements RecordInterface, FindableInterface
@@ -33,5 +35,10 @@ class HashMd5Record implements RecordInterface, FindableInterface
         else {
             $this->output = Hash::B64MD5($data["input"]);
         }
+    }
+
+    public function __toString()
+    {
+        return sprintf("%s = %s", $this->output, $this->input);
     }
 }
