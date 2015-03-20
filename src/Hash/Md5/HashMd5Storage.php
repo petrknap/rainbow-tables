@@ -33,17 +33,69 @@ class HashMd5Storage implements StorageInterface
 
     public function createStorage()
     {
+        // Create main table
         $this->database->IWillBeCareful();
         $this->database->CreateQuery(
             sprintf(
                 "CREATE TABLE IF NOT EXISTS %s (
                   id VARCHAR(%u),
-                  md5_input TEXT UNIQUE,
+                  md5_input TEXT,
                   md5_output VARCHAR(%u)
                 )",
                 $this->name,
                 Hash::B64MD5length,
                 Hash::B64MD5length
+            ),
+            Database::TYPE_MySQL
+        );
+
+        // Create index for key
+        $this->database->IWillBeCareful();
+        $this->database->CreateQuery(
+            sprintf(
+                "CREATE INDEX IF NOT EXISTS id_idx ON %s (id)",
+                $this->name
+            ),
+            Database::TYPE_MySQL
+        );
+
+        // Create index for input
+        $this->database->IWillBeCareful();
+        $this->database->CreateQuery(
+            sprintf(
+                "CREATE UNIQUE INDEX IF NOT EXISTS input_idx ON %s (md5_input)",
+                $this->name
+            ),
+            Database::TYPE_MySQL
+        );
+
+        // Create index for output
+        $this->database->IWillBeCareful();
+        $this->database->CreateQuery(
+            sprintf(
+                "CREATE INDEX IF NOT EXISTS output_idx ON %s (md5_output)",
+                $this->name
+            ),
+            Database::TYPE_MySQL
+        );
+
+        // Create view with collisions
+        $this->database->CreateQuery(
+            sprintf(
+                "CREATE VIEW IF NOT EXISTS %s_collisions AS
+                    SELECT md5_input, md5_output
+                    FROM %s
+                    WHERE md5_output IN (
+                        SELECT md5_output
+                        FROM %s
+                        GROUP BY md5_output
+                        HAVING COUNT(*) > 1
+                    )
+                    ORDER BY md5_output, md5_input
+                ",
+                $this->name,
+                $this->name,
+                $this->name
             ),
             Database::TYPE_MySQL
         );
