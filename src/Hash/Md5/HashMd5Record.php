@@ -39,6 +39,6 @@ class HashMd5Record implements RecordInterface, FindableInterface
 
     public function __toString()
     {
-        return sprintf("%s = %s", $this->output, $this->input);
+        return sprintf("%s", $this->getKey());
     }
 }
