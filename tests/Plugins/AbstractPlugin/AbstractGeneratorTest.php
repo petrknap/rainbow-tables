@@ -15,7 +15,7 @@ abstract class AbstractGeneratorTest extends PHPUnit_Framework_TestCase
 
         $singleBlock = $generator->generateBlock();
 
-        $this->assertCount($generator::MAX_BLOCK_SIZE, $singleBlock);
+        $this->assertGreaterThanOrEqual($generator::BLOCK_SIZE, $singleBlock);
 
         for($i = 0; $i < 5; $i++) {
             $currentBlock = $generator->generateBlock($i);

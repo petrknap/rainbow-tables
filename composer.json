@@ -29,6 +29,9 @@
     },
     "scripts": {
         "test": "phpunit",
-        "md5-generate": "PetrKnap\\RainbowTables\\Hash\\Md5\\Scripts::generate"
+        "crc32-generate": "PetrKnap\\RainbowTables\\Plugin\\Crc32\\Crc32Scripts::generate",
+        "crc32-find": "PetrKnap\\RainbowTables\\Plugin\\Crc32\\Crc32Scripts::find",
+        "md5-generate": "PetrKnap\\RainbowTables\\Plugin\\Md5\\Md5Scripts::generate",
+        "md5-find": "PetrKnap\\RainbowTables\\Plugin\\Md5\\Md5Scripts::find"
     }
 }

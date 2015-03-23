@@ -19,10 +19,20 @@ class Main
      */
     private $generator;
 
-    public static function generateRainbowTable(StorageInterface $storage, GeneratorInterface $generator, $firstBlockNumber, $lastBlockNumber) {
+    public static function generateRainbowTable(StorageInterface $storage, GeneratorInterface $generator) {
         $_this = new self($storage, $generator);
-        for($blockNumber = $firstBlockNumber; $blockNumber <= $lastBlockNumber; $blockNumber++) {
-            $_this->processBlock($blockNumber);
+        $blockNumber = 0;
+
+        while(true) {
+            try {
+                $_this->processBlock($blockNumber++);
+            }
+            catch(\Exception $e) {
+                if(self::$VERBOSE) {
+                    fwrite(STDOUT, "  ERROR: {$e->getMessage()}\n");
+                }
+                break;
+            }
         }
     }
 
@@ -42,13 +52,16 @@ class Main
     public function processBlock($blockNumber) {
         $records = $this->generator->generateBlock($blockNumber);
         $exception = $this->storage->saveRecords($records);
-        if(self::$VERBOSE) {
+        if (self::$VERBOSE) {
             $last = array_pop($records);
-            $first = $records[0];
-            if(!$exception) {
-                fwrite(STDOUT, "  INFO: Block from {$first} to {$last} saved.\n");
+            if (!empty($records)) {
+                $first = $records[0];
+            } else {
+                $first = $last;
             }
-            else {
+            if (!$exception) {
+                fwrite(STDOUT, "  INFO: Block from {$first} to {$last} saved.\n");
+            } else {
                 fwrite(STDOUT, "  ERROR: Block from {$first} to {$last} failed.\nWARNING: {$exception->getMessage()}\n");
             }
         }

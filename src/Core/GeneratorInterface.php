@@ -7,8 +7,8 @@ interface GeneratorInterface
     /**
      * Returns block of records
      *
-     * @param int $blockNumber
+     * @param int|null $blockNumber
      * @return RecordInterface[]
      */
-    public function generateBlock($blockNumber = -1);
+    public function generateBlock($blockNumber = null);
 }

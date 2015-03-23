@@ -1,10 +1,10 @@
 <?php
 
-namespace PetrKnap\RainbowTables\Plugin\Crc32;
+namespace PetrKnap\RainbowTables\Plugin\Md5;
 
 use PetrKnap\RainbowTables\Core\DictionaryToGeneratorAdapter;
 
-class Crc32Generator extends DictionaryToGeneratorAdapter
+class Md5Generator extends DictionaryToGeneratorAdapter
 {
 
     protected function getPathToDictionaryFile()
@@ -14,7 +14,7 @@ class Crc32Generator extends DictionaryToGeneratorAdapter
 
     protected function createRecord($inputData)
     {
-        $record = new Crc32Record();
+        $record = new Md5Record();
 
         $record->setData(array("input_data" => $inputData));
 

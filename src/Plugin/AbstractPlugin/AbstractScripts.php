@@ -51,11 +51,6 @@ abstract class AbstractScripts
         $_this = new $self();
 
         Main::$VERBOSE = true;
-
-        $i = 0;
-        while(!$_this->stopMe($i)) {
-            Main::generateRainbowTable($_this->getStorage(), $_this->getGenerator(), $i, $i + self::BATCH_SIZE);
-            $i += self::BATCH_SIZE + 1;
-        }
+        Main::generateRainbowTable($_this->getStorage(), $_this->getGenerator());
     }
 }

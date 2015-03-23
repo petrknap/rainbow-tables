@@ -62,7 +62,7 @@ abstract class AbstractStorageTest extends PHPUnit_Framework_TestCase
 
             $countOfRecords = $this->database->FetchArray(
                 $this->database->Query(
-                    sprintf("SELECT COUNT(*) AS cnt FROM %s", __CLASS__)
+                    sprintf("SELECT COUNT(*) AS cnt FROM rainbow_tables__%s__data", __CLASS__)
                 ),
                 Database::FETCH_ASSOC
             )["cnt"];
@@ -83,7 +83,7 @@ abstract class AbstractStorageTest extends PHPUnit_Framework_TestCase
 
             $countOfRecords = $this->database->FetchArray(
                 $this->database->Query(
-                    sprintf("SELECT COUNT(*) AS cnt FROM %s", __CLASS__)
+                    sprintf("SELECT COUNT(*) AS cnt FROM rainbow_tables__%s__data", __CLASS__)
                 ),
                 Database::FETCH_ASSOC
             )["cnt"];
@@ -136,7 +136,7 @@ abstract class AbstractStorageTest extends PHPUnit_Framework_TestCase
 
             $countOfRecords = $this->database->FetchArray(
                 $this->database->Query(
-                    sprintf("SELECT COUNT(*) AS cnt FROM %s", __CLASS__)
+                    sprintf("SELECT COUNT(*) AS cnt FROM rainbow_tables__%s__data", __CLASS__)
                 ),
                 Database::FETCH_ASSOC
             )["cnt"];
