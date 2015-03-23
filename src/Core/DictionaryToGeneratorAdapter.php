@@ -85,6 +85,9 @@ abstract class DictionaryToGeneratorAdapter implements GeneratorInterface
             $this->lastBlock = array();
             while (($line = fgets($this->dictionaryHandle)) !== false) {
                 $line = trim($line);
+                if(empty($line)) {
+                    continue;
+                }
                 $this->lastBlock[] = $this->createRecord($line);
                 $j++;
                 if ($blockNumber !== null && $j >= self::BLOCK_SIZE) {
