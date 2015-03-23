@@ -1,0 +1,10 @@
+# CRC32 danger strings
+
+spaceship
+banana
+plumless
+buckeroo
+
+
+
+# MD5 danger strings
